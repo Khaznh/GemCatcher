@@ -195,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 02bd591145db9c6438ea90ec55a37d33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c05eb0b053d6014e850bdea9df08fde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -270,7 +270,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1163,7 +1163,7 @@ Transform:
   m_GameObject: {fileID: 1814054843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.1, y: -3.28, z: 0}
+  m_LocalPosition: {x: -8.1, y: -2.17, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1182,6 +1182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  isInGround: 0
+  jumpForce: 7
 --- !u!212 &1814054847
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1320,7 +1322,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1331,7 +1333,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!82 &1814054852
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1576,7 +1578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07dd2e9ffe65c0042b9bd91c31922453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemPrefap: {fileID: 5474583753569149152, guid: f3feb2fafedfa9644b1955cd1f0846dc, type: 3}
+  prefap: {fileID: 0}
+  timeDelay: 3
 --- !u!1 &1967659611
 GameObject:
   m_ObjectHideFlags: 0
