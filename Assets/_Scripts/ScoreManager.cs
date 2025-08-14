@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameOverText;
     public static ScoreManager Instance { get ; private set; }
     private int playerScore = 0;
-    private int gameTimer = 30;
+    private int gameTimer = 120;
     public bool gameOver = false;
 
     private void Awake()
@@ -48,6 +48,20 @@ public class ScoreManager : MonoBehaviour
     public void RemoveScore(int amount)
     {
         playerScore -= amount;
+    }
+    public void DoubleScore()
+    {
+        playerScore = playerScore * 2;
+    }
+
+    public void TripScore()
+    {
+        playerScore = playerScore * 3;
+    }
+
+    public void FourScore()
+    {
+        playerScore = playerScore * 4;
     }
 
     private void ShowScore()
