@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Rigidbody2D playuerRigidbody2D;
 
+    private float playerRangeNega = -8.3f;
+    private float playerRangePosi = 8.3f;
+
     private Coroutine speedCoroutine;
     public bool isSpeedUp = false;
 
@@ -31,6 +34,16 @@ public class PlayerMovement : MonoBehaviour
             PlayerJump();
         }
 
+        if (transform.position.x < playerRangeNega)
+        {
+            transform.position = new Vector3(playerRangeNega,transform.position.y,0);
+        }
+
+        if (transform.position.x > playerRangePosi)
+        {
+            transform.position = new Vector3(playerRangePosi, transform.position.y, 0);
+        }
+
         if (isMoving && !isGameOver)
         {
             animator.SetBool("isMoving", true);
@@ -48,8 +61,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveHorizontal(float horizontalInput)
     {
-        float horizontalMovement = horizontalInput * playerSpeed * Time.deltaTime;
-        transform.position = new Vector2(transform.position.x + horizontalMovement, transform.position.y);
+        float horizontalMovement = horizontalInput * playerSpeed;
+        //transform.position = new Vector2(transform.position.x + horizontalMovement, transform.position.y);
+        playuerRigidbody2D.linearVelocity = new Vector2(horizontalMovement, playuerRigidbody2D.linearVelocity.y);
     }
 
     private void PlayerJump()

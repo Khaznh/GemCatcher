@@ -64,6 +64,16 @@ public class ScoreManager : MonoBehaviour
         playerScore = playerScore * 4;
     }
 
+    public void AddGameTime(int amount)
+    {
+        gameTimer += amount;
+    }
+
+    public void ReduceGameTime(int amount)
+    {
+        gameTimer -= amount;
+    }
+
     private void ShowScore()
     {
         scoreText.text = "Score: " + playerScore + " | Time: " + gameTimer;
