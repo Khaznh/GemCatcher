@@ -13,7 +13,7 @@ public abstract class FallingItem : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        bool isGameOver = ScoreManager.Instance.gameOver;
+        bool isGameOver = ScoreManager.Instance.isWin;
         if (!isGameOver)
         {
             MovingDown();

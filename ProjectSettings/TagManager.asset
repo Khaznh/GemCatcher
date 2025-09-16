@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Gem
+  - Snowball
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Wind
+    uniqueID: 2461416363
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

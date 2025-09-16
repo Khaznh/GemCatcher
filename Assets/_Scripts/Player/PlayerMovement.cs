@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float playerSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private int jumpNumber = 0;
+    [SerializeField] private GameObject smokePrefaps;
+    [SerializeField] private Transform smokePos;
     private Animator animator;
     private Rigidbody2D playuerRigidbody2D;
 
@@ -27,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = GetUserInput();
 
         bool isMoving = horizontalInput != 0;
-        bool isGameOver = ScoreManager.Instance.gameOver;
 
         if (jumpNumber < 2 &&Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(playerRangePosi, transform.position.y, 0);
         }
 
-        if (isMoving && !isGameOver)
+        if (isMoving)
         {
             animator.SetBool("isMoving", true);
             MoveHorizontal(horizontalInput);
@@ -103,20 +104,4 @@ public class PlayerMovement : MonoBehaviour
             jumpNumber = 0;
         }
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isInGround = true;
-    //    }
-    //}
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isInGround = false;
-    //    }
-    //}
 }

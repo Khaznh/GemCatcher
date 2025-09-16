@@ -3,18 +3,20 @@ using UnityEngine;
 public abstract class SpawnerSystem : MonoBehaviour
 {
     [SerializeField] protected GameObject prefap;
+    [SerializeField] private float delayTimeForIntro = 5f;
 
     private float leftRange = -8f;
     private float rightRange = 8f;
 
     private float timer = 0f;
     [SerializeField] protected float timeDelay = 5f;
+    private bool isIntro = true;
 
     // Update is called once per frame
     void Update()
     {
         bool isReady = IsTimeDelayDone();
-        bool isGameOver = ScoreManager.Instance.gameOver;
+        bool isGameOver = ScoreManager.Instance.isWin;
 
         if (isReady && !isGameOver)
         {
@@ -26,7 +28,9 @@ public abstract class SpawnerSystem : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer < timeDelay)
+        float currentDelay = isIntro ? delayTimeForIntro + timeDelay : timeDelay;
+
+        if (timer < currentDelay)
         {
             return false;
         }
@@ -41,5 +45,7 @@ public abstract class SpawnerSystem : MonoBehaviour
         Vector3 spawnPos = new Vector3(randomPosX, transform.position.y, transform.position.z);
 
         Instantiate(prefap, spawnPos, Quaternion.identity);
+
+        if (isIntro) isIntro = false;
     }
 }

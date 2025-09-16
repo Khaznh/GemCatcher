@@ -5,12 +5,14 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private TextMeshProUGUI gameOverText;
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI goalText;
+    [SerializeField] private GameController gameController;
     public static ScoreManager Instance { get ; private set; }
-    private int playerScore = 0;
-    private int gameTimer = 120;
-    public bool gameOver = false;
+    [SerializeField] private int playerScore = 0;
+    [SerializeField] private int gameTimer = 120;
+    [SerializeField] private int goal = 10;
+    public bool isWin = false;
 
     private void Awake()
     {
@@ -33,11 +35,26 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         ShowScore();
+        ShowTime();
+        ShowGoal();
 
-        if (!gameOver && gameTimer <= 0)
+        if (gameTimer <= 0)
         {
-            GameOver();
+            isWin = IsWin();
+
+            if (isWin)
+            {
+                gameController.LevelComplete();
+            } else
+            {
+                gameController.GameOver();
+            }
         }
+    }
+     
+    private bool IsWin()
+    {
+        return playerScore >= goal;
     }
 
     public void AddScore(int amount)
@@ -48,6 +65,11 @@ public class ScoreManager : MonoBehaviour
     public void RemoveScore(int amount)
     {
         playerScore -= amount;
+
+        if (playerScore <= 0)
+        {
+            playerScore = 0;
+        }
     }
     public void DoubleScore()
     {
@@ -76,7 +98,17 @@ public class ScoreManager : MonoBehaviour
 
     private void ShowScore()
     {
-        scoreText.text = "Score: " + playerScore + " | Time: " + gameTimer;
+        scoreText.text = $"{playerScore}";
+    }
+
+    private void ShowTime()
+    {
+        timeText.text = "Time: " + gameTimer;
+    }
+
+    private void ShowGoal()
+    {
+        goalText.text = "Goal: " + goal;
     }
 
     private IEnumerator CountDownTimer()
@@ -86,12 +118,5 @@ public class ScoreManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             gameTimer--;
         }
-    }
-
-    private void GameOver()
-    {
-        gameOverPanel.SetActive(true);
-        gameOverText.text = "Game over \nScore: " + playerScore;
-        gameOver = true;
     }
 }
